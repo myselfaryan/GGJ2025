@@ -67,12 +67,13 @@
     <div id="game-content">
         <div id="canvas"></div>
         <div>Presented to you by team @QuestCoder</div>
-        <div>if this aint loading then just keep hitting refresh, have fun.</div>
+        <div>If this isn't loading, just keep hitting refresh. Have fun!</div>
     </div>
 
     <script>
         const video = document.getElementById('intro-video');
-        
+        const audio = new Audio('audio/intro-song.mp3'); // Path to your audio file
+
         function initializeVideo() {
             video.defaultMuted = false;
             video.muted = false;
@@ -87,14 +88,23 @@
         function skipIntro() {
             document.getElementById('intro-section').style.display = 'none';
             document.getElementById('game-content').style.display = 'block';
+            playSound();
         }
 
-        video.addEventListener('ended', skipIntro);
-        
+        function playSound() {
+            audio.play().catch(error => {
+                console.error('Failed to play audio:', error);
+            });
+        }
+
+        video.addEventListener('ended', () => {
+            skipIntro();
+        });
+
         // Multiple initialization attempts
         window.addEventListener('load', initializeVideo);
         document.addEventListener('DOMContentLoaded', initializeVideo);
-        
+
         // Fallback interaction
         document.body.addEventListener('click', initializeVideo, { once: true });
     </script>
