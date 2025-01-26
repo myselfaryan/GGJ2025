@@ -49,15 +49,15 @@ let evolationSpeed = 1;
 
 function preload() {
     backgroundImage = loadImage('images/levelImages/1.png')
-    idleImage = loadImage('images/poses/idle.png')
-    squatImage = loadImage('images/poses/squat.png')
-    jumpImage = loadImage('images/poses/jump.png')
-    oofImage = loadImage('images/poses/oof.png')
-    run1Image = loadImage('images/poses/run1.png')
-    run2Image = loadImage('images/poses/run2.png')
-    run3Image = loadImage('images/poses/run3.png')
-    fallenImage = loadImage('images/poses/fallen.png')
-    fallImage = loadImage('images/poses/fall.png')
+    idleImage = loadImage('images/poses/bubble.png')
+    squatImage = loadImage('images/poses/bubble.png')
+    jumpImage = loadImage('images/poses/bubble.png')
+    oofImage = loadImage('images/poses/bubble.png')
+    run1Image = loadImage('images/poses/bubble.png')
+    run2Image = loadImage('images/poses/bubble.png')
+    run3Image = loadImage('images/poses/bubble.png')
+    fallenImage = loadImage('images/poses/bubble.png')
+    fallImage = loadImage('images/poses/bubble.png')
 
 
     snowImage = loadImage('images/snow3.png')
