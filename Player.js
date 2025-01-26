@@ -1178,7 +1178,7 @@ class Player {
     }
 
     CheckForLevelChange() {
-        if(this.currentLevelNo == 7){
+        if(this.currentLevelNo == 8){
             
         this.hasWon = true;
         this.gameEnded = true;

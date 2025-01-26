@@ -133,6 +133,35 @@ function setupLevels() {
     levels.push(tempLevel);
 
     tempLevel = new Level();
+    tempLevel.lines.push(new Line(0,0,0,900)); 
+    tempLevel.lines.push(new Line(1200,0,1200,900)); 
+    tempLevel.lines.push(new Line(1200,540,700,540)); 
+    tempLevel.lines.push(new Line(700,540,700,600)); 
+    tempLevel.lines.push(new Line(1200,600,700,600)); 
+    tempLevel.lines.push(new Line(100,740,520,740)); 
+    tempLevel.lines.push(new Line(520,740,520,800)); 
+    tempLevel.lines.push(new Line(100,800,520,800)); 
+    tempLevel.lines.push(new Line(100,800,100,740)); 
+    tempLevel.lines.push(new Line(0,560,220,560)); 
+    tempLevel.lines.push(new Line(220,560,220,600)); 
+    tempLevel.lines.push(new Line(220,600,0,600)); 
+    tempLevel.lines.push(new Line(0,280,260,280)); 
+    tempLevel.lines.push(new Line(260,280,260,320)); 
+    tempLevel.lines.push(new Line(260,320,0,320)); 
+    tempLevel.lines.push(new Line(340,200,540,200)); 
+    tempLevel.lines.push(new Line(540,200,540,260)); 
+    tempLevel.lines.push(new Line(540,260,340,260)); 
+    tempLevel.lines.push(new Line(340,260,340,200)); 
+    tempLevel.lines.push(new Line(740,40,980,40)); 
+    tempLevel.lines.push(new Line(980,40,980,80)); 
+    tempLevel.lines.push(new Line(740,80,980,80)); 
+    tempLevel.lines.push(new Line(760,80,760,40)); 
+    tempLevel.lines.push(new Line(740,40,740,80)); 
+    tempLevel.lines.push(new Line(1160,540,1160,380)); 
+    tempLevel.lines.push(new Line(1160,380,1220,380)); 
+    levels.push(tempLevel);
+
+    tempLevel = new Level();
 
     tempLevel.lines.push(new Line(0,0,180,240)); 
     tempLevel.lines.push(new Line(0,0,0,900)); 
@@ -1688,10 +1717,10 @@ function setupLevels() {
     // levels.push(tempLevel);
     for (let i = 0; i < levels.length; i++) {
         levels[i].levelImage = levelImages[i];
-        if ((i >= 25 && i <= 31)) {
+        if ((i >= 6 && i < 7)) {
             levels[i].isBlizzardLevel = true;
         }
-        if ((i >= 36 && i <= 38)) {
+        if ((i >= 7 && i < 8)) {
             levels[i].isIceLevel = true;
         }
     }
