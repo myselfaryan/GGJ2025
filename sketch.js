@@ -56,7 +56,7 @@ function preload() {
     run1Image = loadImage('images/poses/bubble.png')
     run2Image = loadImage('images/poses/bubble.png')
     run3Image = loadImage('images/poses/bubble.png')
-    fallenImage = loadImage('images/poses/bubble.png')
+    fallenImage = loadImage('images/poses/fall_new.png')
     fallImage = loadImage('images/poses/bubble.png')
 
 
