@@ -4,6 +4,7 @@ let maxJumpTimer = 30
 let jumpSpeedHorizontal = 8
 let terminalVelocity = 20
 let gravity = 0.6;
+let winSound = null;
 
 let runSpeed = 4;
 let maxBlizzardForce = 0.3;
@@ -193,6 +194,7 @@ class Player {
         this.bestLevelReachedOnActionNo = 0;
         //
         // this.jumpSound = loadSound('sounds/jump.mp3')
+        this.winSound = loadSound('sounds/win.mp3')
         // this.fallSound = loadSound('sounds/fall.mp3')
         // bumpSound = loadSound('sounds/bump.mp3')
         // landSound = loadSound('sounds/land.mp3')
@@ -289,7 +291,7 @@ class Player {
     }
 
     Update() {
-        if (this.playersDead)//|| this.hasFinishedInstructions)
+        if (this.playersDead   || this.gameEnded)//|| this.hasFinishedInstructions)
             return;
         let currentLines = levels[this.currentLevelNo].lines;
         if (!testingSinglePlayer && !this.hasFinishedInstructions) {
@@ -306,7 +308,7 @@ class Player {
         this.CheckCollisions(currentLines)
         this.UpdateJumpTimer()
         this.CheckForLevelChange();
-        this.CheckForCoinCollisions();
+        // this.CheckForCoinCollisions();
 
         if (this.getNewPlayerStateAtEndOfUpdate) {
             if (this.currentLevelNo !== 37) {
@@ -1045,7 +1047,6 @@ class Player {
 
 
                         if (playerCornerPos === null) {
-                            print("fuck");
                             print(left, right, top, bottom);
                             playerCornerPos = this.currentPos.copy();
 
@@ -1114,8 +1115,76 @@ class Player {
         }
         return chosenLine;
     }
+    
+    showWinScreen() {
+        // Create container
+        const winScreen = document.createElement('div');
+        winScreen.id = 'win-screen';
+        
+        // Style container
+        winScreen.style.cssText = `
+            position: fixed;
+            top: 10%; /* Distance from top */
+            right: 10%; /* Center horizontally */
+            left: 10%;
+            transform: translate(-50%, 0); /* Remove vertical shift */
+            background: radial-gradient(circle, rgba(255, 223, 186, 0.8), rgba(255, 140, 0, 0.9));
+            color: white;
+            padding: 3rem;
+            border-radius: 25px;
+            text-align: center;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            z-index: 1000;
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.8), 0 0 20px rgba(255, 140, 0, 0.6);
+            animation: popin 1s ease-out forwards;
+        `;
+        
+        // Add content
+        winScreen.innerHTML = `
+            <h1 style="font-size: 3rem; margin-bottom: 1.5rem; text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);">🎉 Congratulations, Poochi! 🎉</h1>
+            <p style="font-size: 1.5rem; margin-bottom: 2rem; line-height: 1.5; text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);">
+                After a journey full of challenges, twists, and turns, Poochi has finally reached the top! 🌟 His unwavering determination and courage have led him to victory. 
+                🐾👏 You've conquered it all, Poochi! Well done on completing the adventure and making it to the finish line. 
+                The game has ended, but your victory will always shine bright! 🏆✨
+            </p>
+            <button 
+                onclick="location.reload()" 
+                style="
+                    padding: 1.2rem 2.5rem;
+                    font-size: 1.5rem;
+                    background:rgb(150, 137, 64);
+                    border: none;
+                    border-radius: 10px;
+                    color: #222;
+                    cursor: pointer;
+                    transition: background 0.2s, transform 0.3s;
+                    box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+                "
+                onmouseover="this.style.background='#FFCC00'; this.style.transform='scale(1.05)'"
+                onmouseout="this.style.background='#FFD700'; this.style.transform='scale(1)'"
+            >
+                Play Again
+            </button>
+        `;
+        
+        // Add to document
+        document.body.appendChild(winScreen);
+    
+        // Optional: Play victory sound
+        if (this.winSound) this.winSound.play();
+        
+        // Return statement for the function
+        // return;
+    }
 
     CheckForLevelChange() {
+        if(this.currentLevelNo == 7){
+            
+        this.hasWon = true;
+        this.gameEnded = true;
+        this.showWinScreen();
+        return;
+        }
         if (this.currentPos.y < -this.height) {
             //we are at the top of the screen
             this.currentLevelNo += 1;
@@ -1312,3 +1381,12 @@ function AreLinesColliding(x1, y1, x2, y2, x3, y3, x4, y4) {
     return [false, 0, 0]
 
 }
+
+const style = document.createElement('style');
+style.innerHTML = `
+    @keyframes popin {
+        0% { opacity: 0; transform: scale(0.8); }
+        100% { opacity: 1; transform: scale(1); }
+    }
+`;
+document.head.appendChild(style);
