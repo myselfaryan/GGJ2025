@@ -344,7 +344,7 @@ function mouseClicked() {
             mousePos1 = createVector(snappedX, snappedY);
         } else {
             mousePos2 = createVector(snappedX, snappedY);
-            // print('tempLevel.lines.push(new Line(' + mousePos1.x + ',' + mousePos1.y + ',' + mousePos2.x + ',' + mousePos2.y + '));');
+            print('tempLevel.lines.push(new Line(' + mousePos1.x + ',' + mousePos1.y + ',' + mousePos2.x + ',' + mousePos2.y + '));');
             lines.push(new Line(mousePos1.x, mousePos1.y, mousePos2.x, mousePos2.y));
             linesString += '\ntempLevel.lines.push(new Line(' + mousePos1.x + ',' + mousePos1.y + ',' + mousePos2.x + ',' + mousePos2.y + '));';
             mousePos1 = null;
